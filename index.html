@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Café Skaff Menu</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="overlay">
+    <h1 class="title">Café Skaff Menu</h1>
+
+    <!-- الأزرار -->
+    <div class="buttons">
+      <button onclick="showSection('cold')">مشروبات باردة</button>
+      <button onclick="showSection('hot')">مشروبات ساخنة</button>
+      <button onclick="showSection('shisha')">أراجيل</button>
+      <button onclick="showSection('all')">الكل</button>
+    </div>
+
+    <!-- الأقسام -->
+    <div id="cold" class="section">
+      <div class="product"><h2>Water</h2><p>50,000L.L</p></div>
+      <div class="product"><h2>pepsi&7up&Mirenda</h2><p>100,000L.L</p></div>
+      <div class="product"><h2>Lemon Fresh</h2><p>200,000L.L</p></div>
+      <div class="product"><h2>Carrot Fresh</h2><p>200,000L.L</p></div>
+      <div class="product"><h2>Ice Coffe</h2><p>150,000L.L</p></div>
+      <div class="product"><h2>XXL</h2><p>100,000L.L</p></div>
+    </div>
+
+    <div id="hot" class="section">
+      <div class="product"><h2>Espresso</h2><p>150,000L.L</p></div>
+      <div class="product"><h2>Cappuccino</h2><p>150,000L.L</p></div>
+      <div class="product"><h2>Nescaffe</h2><p>150,000L.L</p></div>
+      <div class="product"><h2>Hot Chocolate</h2><p>150,000L.L</p></div>
+      <div class="product"><h2>Caffe Latte</h2><p>200,000L.L</p></div>
+      <div class="product"><h2>Chay</h2><p>150,000L.L</p></div>
+      <div class="product"><h2>Ahwe Terki</h2><p>150,000L.L</p></div>
+    </div>
+
+    <div id="shisha" class="section">
+      <div class="product"><h2>Apple Shisha</h2><p>600,000L.L</p></div>
+      <div class="product"><h2>Hamod&Na3na3 Shisha</h2><p>600,000L.L</p></div>
+      <div class="product"><h2>Terke Shisha</h2><p>800,000L.L</p></div>
+      <div class="product"><h2>Asfahani Shisha </h2><p>900,000L.L</p></div>
+    </div>
+
+    <div id="all" class="section">
+      <div class="product"><h2>Water</h2><p>50,000L.L</p></div>
+      <div class="product"><h2>pepsi&7up&Mirenda</h2><p>100,000L.L</p></div>
+      <div class="product"><h2>Lemon Fresh</h2><p>200,000L.L</p></div>
+      <div class="product"><h2>Carrot Fresh</h2><p>200,000L.L</p></div>
+      <div class="product"><h2>Ice Coffe</h2><p>150,000L.L</p></div>
+      <div class="product"><h2>XXL</h2><p>100,000L.L</p></div>
+      <div class="product"><h2>Espresso</h2><p>150,000L.L</p></div>
+      <div class="product"><h2>Cappuccino</h2><p>150,000L.L</p></div>
+      <div class="product"><h2>Nescaffe</h2><p>150,000L.L</p></div>
+      <div class="product"><h2>Hot Chocolate</h2><p>150,000L.L</p></div>
+      <div class="product"><h2>Caffe Latte</h2><p>200,000L.L</p></div>
+      <div class="product"><h2>Chay</h2><p>150,000L.L</p></div>
+      <div class="product"><h2>Ahwe Terki</h2><p>150,000L.L</p></div>
+      <div class="product"><h2>Apple Shisha</h2><p>600,000L.L</p></div>
+      <div class="product"><h2>Hamod&Na3na3 Shisha</h2><p>600,000L.L</p></div>
+      <div class="product"><h2>Terke Shisha</h2><p>800,000L.L</p></div>
+      <div class="product"><h2>Asfahani Shisha </h2><p>900,000L.L</p></div>
+    </div>
+
+  </div>
+
+  <script>
+    function showSection(sectionId) {
+      // أخفي كل الأقسام
+      document.querySelectorAll('.section').forEach(sec => sec.style.display = 'none');
+      // أظهر القسم المطلوب
+      document.getElementById(sectionId).style.display = 'block';
+    }
+
+    // افتراضي: عرض الكل
+    showSection('all');
+  </script>
+</body>
+</html>
