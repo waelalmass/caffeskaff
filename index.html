@@ -1,82 +1,319 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Café Skaff Menu</title>
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Café Skaff Menu</title>
+<style>
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  color: #f2c98b;
+  background:
+    linear-gradient(rgba(0,0,0,.80), rgba(0,0,0,.88)),
+    url("https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1200&q=85")
+    center / cover fixed;
+}
+header {
+  text-align: center;
+  padding: 35px 12px 22px;
+}
+.logo {
+  font-size: 55px;
+  margin-bottom: 8px;
+}
+h1 {
+  font-size: clamp(32px, 7vw, 58px);
+  margin: 0;
+  font-weight: 800;
+}
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  padding: 20px 12px 35px;
+}
+.categories button {
+  border: none;
+  border-radius: 16px;
+  background: #f2c98b;
+  color: #17130f;
+  padding: 17px 23px;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.menu {
+  width: min(92%, 900px);
+  margin: auto;
+  display: grid;
+  gap: 24px;
+  padding-bottom: 35px;
+}
+.item {
+  min-height: 170px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 18px;
+  border: 1px solid #34302b;
+  border-radius: 23px;
+  background: rgba(35,35,35,.88);
+  box-shadow: 0 8px 25px rgba(0,0,0,.18);
+}
+.item img {
+  width: 165px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 19px;
+  flex-shrink: 0;
+}
+.details {
+  min-width: 0;
+  flex: 1;
+}
+.name {
+  font-size: clamp(17px, 3.3vw, 29px);
+  font-weight: bold;
+  overflow-wrap: anywhere;
+}
+.price {
+  font-size: clamp(16px, 2.8vw, 25px);
+  font-weight: bold;
+  white-space: nowrap;
+  text-align: right;
+}
+footer {
+  text-align: center;
+  padding: 25px 12px 45px;
+}
+footer span {
+  display: inline-block;
+  border: 1px solid #554738;
+  border-radius: 35px;
+  padding: 17px 28px;
+  font-weight: bold;
+}
+@media (max-width: 500px) {
+  header {
+    padding-top: 28px;
+  }
+  .logo {
+    font-size: 42px;
+  }
+  .categories {
+    gap: 9px;
+    padding-bottom: 28px;
+  }
+  .categories button {
+    padding: 14px 15px;
+    font-size: 15px;
+  }
+  .menu {
+    width: 92%;
+    gap: 16px;
+  }
+  .item {
+    min-height: 125px;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 19px;
+  }
+  .item img {
+    width: 92px;
+    height: 105px;
+    border-radius: 15px;
+  }
+  .name {
+    font-size: 17px;
+  }
+  .price {
+    font-size: 15px;
+  }
+}
+@media (max-width: 350px) {
+  .item {
+    gap: 8px;
+    padding: 9px;
+  }
+  .item img {
+    width: 75px;
+    height: 90px;
+  }
+  .name, .price {
+    font-size: 13px;
+  }
+}
+</style>
 </head>
 <body>
-  <div class="overlay">
-    <h1 class="title">Café Skaff Menu</h1>
+<header>
+  <div class="logo">☕</div>
+  <h1>Café Skaff Menu</h1>
+</header>
+<nav class="categories">
+  <button onclick="filterMenu('cold')">مشروبات باردة</button>
+  <button onclick="filterMenu('hot')">مشروبات ساخنة</button>
+  <button onclick="filterMenu('argile')">أراجيل</button>
+  <button onclick="filterMenu('all')">الكل</button>
+</nav>
+<main class="menu" id="menu"></main>
+<footer>
+  <span>◎ &nbsp; waelalmass.github.io</span>
+</footer>
+<script>
+const products = [
+  {
+    name: "Water",
+    price: 50000,
+    category: "cold",
+    image: "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?auto=format&fit=crop&w=400&q=80"
+  },
+  {
+    name: "Soft Drink",
+    price: 100000,
+    category: "cold",
+    image: "https://images.unsplash.com/photo-1581636625402-29b2a704ef13?auto=format&fit=crop&w=400&q=80"
+  },
+  {
+    name: "Lemon Fresh",
+    price: 200000,
+    category: "cold",
+    image: "https://copilot.microsoft.com/th/id/BCO.7044a7c5-d6cc-4bbe-9cc2-2426da079f59.png"
+  },
+  {
+    name: "Carrot Fresh",
+    price: 200000,
+    category: "cold",
+    image: "https://copilot.microsoft.com/th/id/BCO.efb48883-e4a8-483c-b104-a06772a7be73.png"
+  },
+  {
+  name: "Pineapple",
+    price: 200000,
+    category: "cold",
+    image: "https://copilot.microsoft.com/th/id/BCO.fd17da2c-7172-4f11-9963-bc0c22d1ea4a.png" 
+  },
+  {
+  name: "Mango",
+    price: 200000,
+    category: "cold",
+    image: "https://copilot.microsoft.com/th/id/BCO.ad35d5b9-1ab2-44b1-a319-3e71dd8914dc.png"  
+  },
+  {
+    name: "Ice Coffee",
+    price: 150000,
+    category: "cold",
+    image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=400&q=80"
+  },
+  {
+    name: "Energy Drink",
+    price: 100000,
+    category: "cold",
+    image: "https://copilot.microsoft.com/th/id/BCO.4f8a9d7c-6a3b-4f2c-9d1a-7c2b8e9f3a22.png" 
+  },
 
-    <!-- الأزرار -->
-    <div class="buttons">
-      <button onclick="showSection('cold')">مشروبات باردة</button>
-      <button onclick="showSection('hot')">مشروبات ساخنة</button>
-      <button onclick="showSection('shisha')">أراجيل</button>
-      <button onclick="showSection('all')">الكل</button>
-    </div>
+  //!mashroubet sekhne!//
 
-    <!-- الأقسام -->
-    <div id="cold" class="section">
-      <div class="product"><h2>Water</h2><p>50,000L.L</p></div>
-      <div class="product"><h2>pepsi&7up&Mirenda</h2><p>100,000L.L</p></div>
-      <div class="product"><h2>Lemon Fresh</h2><p>200,000L.L</p></div>
-      <div class="product"><h2>Carrot Fresh</h2><p>200,000L.L</p></div>
-      <div class="product"><h2>Ice Coffe</h2><p>150,000L.L</p></div>
-      <div class="product"><h2>XXL</h2><p>100,000L.L</p></div>
-    </div>
+   {
+    name: "Espresso",
+    price: 150000,
+    category: "hot",
+    image: "https://copilot.microsoft.com/th/id/BCO.86563e9a-2f02-4c45-bc0d-3c0069a66d7d.png" 
+  },
+  {
+    name: "Cappucino",
+    price: 150000,
+    category: "hot",
+    image: "https://copilot.microsoft.com/th/id/BCO.8bbe6c5b-6e51-4111-9be8-70e9eadb8128.png"   
+  },
+  {
+    name: "Nescaffe",
+    price: 150000,
+    category: "hot",
+    image: "https://copilot.microsoft.com/th/id/BCO.c019d97f-5344-4461-8b42-8e2692b3ef08.png"     
+  },
+  {
+    name: "Hot Chocolate",
+    price: 150000,
+    category: "hot",
+    image: "https://copilot.microsoft.com/th/id/BCO.8a748c53-9ae8-48c7-b8e6-bde3459a58d9.png"     
+  },
+  {
+    name: "Tea",
+    price: 150000,
+    category: "hot",
+    image: "https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=400"         
+  },
+  {
+    name: "Caffe Latte",
+    price: 200000,
+    category: "hot",
+    image: "https://images.unsplash.com/photo-1561882468-9110e03e0f78?w=400"         
+  },
+  
 
-    <div id="hot" class="section">
-      <div class="product"><h2>Espresso</h2><p>150,000L.L</p></div>
-      <div class="product"><h2>Cappuccino</h2><p>150,000L.L</p></div>
-      <div class="product"><h2>Nescaffe</h2><p>150,000L.L</p></div>
-      <div class="product"><h2>Hot Chocolate</h2><p>150,000L.L</p></div>
-      <div class="product"><h2>Caffe Latte</h2><p>200,000L.L</p></div>
-      <div class="product"><h2>Chay</h2><p>150,000L.L</p></div>
-      <div class="product"><h2>Ahwe Terki</h2><p>150,000L.L</p></div>
-    </div>
 
-    <div id="shisha" class="section">
-      <div class="product"><h2>Apple Shisha</h2><p>600,000L.L</p></div>
-      <div class="product"><h2>Hamod&Na3na3 Shisha</h2><p>600,000L.L</p></div>
-      <div class="product"><h2>Terke Shisha</h2><p>800,000L.L</p></div>
-      <div class="product"><h2>Asfahani Shisha </h2><p>900,000L.L</p></div>
-    </div>
+  {
+    name: "Double Apple Shisha",
+    price: 600000,
+    category: "argile",
+    image: "https://www.shishabox.club/cdn/shop/files/exec-d5cfc7ed-7ee8-46e4-acab-e8e2d1e9f8df.png?v=1787156577&width=1254"         
+  },
+  {
+    name: "Hamod&Na3nae3 Shisha",
+    price: 600000,
+    category: "argile",
+    image: "https://www.shishabox.club/cdn/shop/files/exec-d5cfc7ed-7ee8-46e4-acab-e8e2d1e9f8df.png?v=1787156577&width=1254"         
+  },
+  {
+    name: "Terki Shisha",
+    price: 800000,
+    category: "argile",
+    image: "https://www.shishabox.club/cdn/shop/files/exec-d5cfc7ed-7ee8-46e4-acab-e8e2d1e9f8df.png?v=1787156577&width=1254"         
+  },
+  {
+    name: "Asfahani Shisha",
+    price: 900000,
+    category: "argile",
+    image: "https://www.shishabox.club/cdn/shop/files/exec-d5cfc7ed-7ee8-46e4-acab-e8e2d1e9f8df.png?v=1787156577&width=1254"         
+  },
+  
 
-    <div id="all" class="section">
-      <div class="product"><h2>Water</h2><p>50,000L.L</p></div>
-      <div class="product"><h2>pepsi&7up&Mirenda</h2><p>100,000L.L</p></div>
-      <div class="product"><h2>Lemon Fresh</h2><p>200,000L.L</p></div>
-      <div class="product"><h2>Carrot Fresh</h2><p>200,000L.L</p></div>
-      <div class="product"><h2>Ice Coffe</h2><p>150,000L.L</p></div>
-      <div class="product"><h2>XXL</h2><p>100,000L.L</p></div>
-      <div class="product"><h2>Espresso</h2><p>150,000L.L</p></div>
-      <div class="product"><h2>Cappuccino</h2><p>150,000L.L</p></div>
-      <div class="product"><h2>Nescaffe</h2><p>150,000L.L</p></div>
-      <div class="product"><h2>Hot Chocolate</h2><p>150,000L.L</p></div>
-      <div class="product"><h2>Caffe Latte</h2><p>200,000L.L</p></div>
-      <div class="product"><h2>Chay</h2><p>150,000L.L</p></div>
-      <div class="product"><h2>Ahwe Terki</h2><p>150,000L.L</p></div>
-      <div class="product"><h2>Apple Shisha</h2><p>600,000L.L</p></div>
-      <div class="product"><h2>Hamod&Na3na3 Shisha</h2><p>600,000L.L</p></div>
-      <div class="product"><h2>Terke Shisha</h2><p>800,000L.L</p></div>
-      <div class="product"><h2>Asfahani Shisha </h2><p>900,000L.L</p></div>
-    </div>
-
-  </div>
-
-  <script>
-    function showSection(sectionId) {
-      // أخفي كل الأقسام
-      document.querySelectorAll('.section').forEach(sec => sec.style.display = 'none');
-      // أظهر القسم المطلوب
-      document.getElementById(sectionId).style.display = 'block';
-    }
-
-    // افتراضي: عرض الكل
-    showSection('all');
-  </script>
+];
+const menu = document.getElementById("menu");
+function renderMenu(category = "all") {
+  menu.innerHTML = "";
+  products
+    .filter(p => category === "all" || p.category === category)
+    .forEach(p => {
+      const card = document.createElement("article");
+      card.className = "item";
+      const img = document.createElement("img");
+      img.src = p.image;
+      img.alt = p.name;
+      img.loading = "lazy";
+      const details = document.createElement("div");
+      details.className = "details";
+      const name = document.createElement("div");
+      name.className = "name";
+      name.textContent = p.name;
+      const price = document.createElement("div");
+      price.className = "price";
+      price.textContent = p.price.toLocaleString("en-US") + " L.L";
+      details.append(name);
+      card.append(img, details, price);
+      menu.appendChild(card);
+    });
+}
+function filterMenu(category) {
+  renderMenu(category);
+}
+renderMenu();
+</script>
 </body>
 </html>
